@@ -17,37 +17,22 @@ Pod::Spec.new do |spec|
 
   spec.name         = "BrimodSDK"
   spec.version      = "0.0.1"
-  spec.summary      = "A short description of BrimodSDK."
+  spec.summary      = "BrimodSDK is a Swift and Objective-C library for iOS development."
   spec.description  = <<-DESC
+  BrimodSDK provides essential functionality for iOS applications, including native bridge components 
+  and utilities for seamless integration with React Native projects.
                    DESC
 
-  spec.homepage     = "http://EXAMPLE/BrimodSDK"
-  spec.license      = { :type => "MIT", :file => "LICENSE" }
+  spec.homepage     = "https://github.com/gregkyt/BrimodSDK"
+  spec.license      = { :type => "MIT", :file => "ios/LICENSE" }
 
-
-  # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Specify the authors of the library, with email addresses. Email addresses
-  #  of the authors are extracted from the SCM log. E.g. $ git log. CocoaPods also
-  #  accepts just a name if you'd rather not provide an email address.
-  #
-  #  Specify a social_media_url where others can refer to, for example a twitter
-  #  profile URL.
-  #
-
-  spec.author             = { "" => "" }
+  spec.author             = { "Bangkit" => "gregkyt@gmail.com" }
   # Or just: spec.author    = ""
   # spec.authors            = { "" => "" }
   # spec.social_media_url   = "https://twitter.com/"
 
-  # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  If this Pod runs only on iOS or OS X, then specify the platform and
-  #  the deployment target. You can optionally include the target after the platform.
-  #
-
   # spec.platform     = :ios
-  # spec.platform     = :ios, "5.0"
+  spec.platform     = :ios, "13.0"
 
   #  When using multiple platforms
   # spec.ios.deployment_target = "5.0"
@@ -63,7 +48,7 @@ Pod::Spec.new do |spec|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "http://EXAMPLE/BrimodSDK.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/gregkyt/BrimodSDK.git", :commit => "HEAD" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -74,8 +59,9 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "Classes", "Classes/**/*.{h,m}"
-  spec.exclude_files = "Classes/Exclude"
+  spec.source_files = 'ios/BrimodSDK/**/*.{swift,h,m,mm}'
+  spec.resources = 'ios/BrimodSDK/Images.xcassets'
+  # spec.exclude_files = "Classes/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"
 
