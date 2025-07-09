@@ -1,6 +1,6 @@
 # Node modules
-# node_modules/
-# **/node_modules/
+node_modules/
+**/node_modules/
 
 # macOS system files
 .DS_Store
@@ -63,7 +63,7 @@ web-build/
 
 # Ruby / CocoaPods
 **/Pods/
-# /vendor/*
+/vendor/*
 .ruby_version
 .nvmrc
 .gitmodules
