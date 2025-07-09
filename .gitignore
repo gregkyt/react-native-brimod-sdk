@@ -67,9 +67,3 @@ web-build/
 .ruby_version
 .nvmrc
 .gitmodules
-
-# Submodules
-ios/
-**/ios/
-android/
-**/android/
