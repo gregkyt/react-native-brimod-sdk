@@ -1,66 +1,75 @@
-# OSX
-#
+# Node modules
+node_modules/
+**/node_modules/
+
+# macOS system files
 .DS_Store
 
-# Xcode
-#
-build/
-*.pbxuser
-!default.pbxuser
-*.mode1v3
-!default.mode1v3
-*.mode2v3
-!default.mode2v3
-*.perspectivev3
-!default.perspectivev3
-xcuserdata
-*.xccheckout
-*.moved-aside
-DerivedData
-*.hmap
-*.ipa
-*.xcuserstate
-ios/.xcode.env.local
+# Android build artifacts
+**/build/
+**/dist/
+**/.build/
+**/.gradle/
+**/.idea/
+**/local.properties
+**/.cxx/
+**/.externalNativeBuild/
+**/captures/
+**/outputs/
+**/intermediates/
+**/generated/
 
-# Android/IntelliJ
-#
-build/
-.idea
-.gradle
-local.properties
-*.iml
-*.hprof
-.cxx/
+# iOS build artifacts
+**/Pods/
+**/DerivedData/
+**/xcuserdata/
+**/*.xcworkspace
+**/*.xcodeproj/project.xcworkspace/
+**/*.xcodeproj/xcuserdata/
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Misc
+.env
+.env.*
 *.keystore
-!debug.keystore
+*.jks
+*.iml
+*.apk
+*.ap_
+*.hprof
+*.orig
+*.rej
 
-# node.js
-#
-node_modules/
-npm-debug.log
-yarn-error.log
+# JetBrains IDEs
+.idea/
+*.iml
 
-# fastlane
-#
-# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
-# screenshots whenever they are needed.
-# For more information about the recommended setup visit:
-# https://docs.fastlane.tools/best-practices/source-control/
+# Test coverage
+coverage/
+**/coverage/
 
-**/fastlane/report.xml
-**/fastlane/Preview.html
-**/fastlane/screenshots
-**/fastlane/test_output
+# React Native
+.expo/
+.expo-shared/
+web-build/ 
 
 # Bundle artifact
 *.jsbundle
 
 # Ruby / CocoaPods
-/ios/Pods/
-/vendor/bundle/
+**/Pods/
+/vendor/*
+.ruby_version
+.nvmrc
+.gitmodules
 
-# Temporary files created by Metro to check the health of the file watcher
-.metro-health-check*
-
-# testing
-/coverage
+# Submodules
+ios/
+**/ios/
+android/
+**/android/
