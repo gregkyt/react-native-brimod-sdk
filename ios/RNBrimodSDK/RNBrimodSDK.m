@@ -6,8 +6,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <React-Core/RCTBridgeModule.h>
-#import <React-Core/RCTEventEmitter.h>
+#import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
 
 @interface RCT_EXTERN_MODULE(RNBrimodSDK, RCTEventEmitter)
 
@@ -26,6 +26,11 @@ RCT_EXTERN_METHOD(navigateToNative:
                   (NSString * _Nullable)name
                   params:(NSDictionary * _Nullable)params
                   isRnDismissed:(NSNumber * _Nonnull)isRnDismissed)
+
+RCT_EXTERN_METHOD(navigateToReact:
+                  (NSString * _Nullable)bundleName
+                  appName(NSString * _Nonnull)appName
+                  params:(NSDictionary * _Nullable)params)
 
 RCT_EXTERN_METHOD(dismissReact)
 
