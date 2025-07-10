@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		ABA1D41E4C9522DBBC3083BD /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = E8AE61FC0D0CBCECE00DB462 /* PrivacyInfo.xcprivacy */; };
-		D4F5AB129FF77DB760A93006 /* Pods_RNBrimodSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07BBA0804A447075F86FCA03 /* Pods_RNBrimodSDK.framework */; };
+		AD37D03F11D6AF61C1BED1F6 /* libPods-RNBrimodSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E49701EB4A1E4C14C3A36CB /* libPods-RNBrimodSDK.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		07BBA0804A447075F86FCA03 /* Pods_RNBrimodSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RNBrimodSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		523761872E1E2C8100F2A8F8 /* RNBrimodSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RNBrimodSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E49701EB4A1E4C14C3A36CB /* libPods-RNBrimodSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNBrimodSDK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8026AEEFE64FBBC9FE010F6E /* Pods-RNBrimodSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNBrimodSDK.release.xcconfig"; path = "Target Support Files/Pods-RNBrimodSDK/Pods-RNBrimodSDK.release.xcconfig"; sourceTree = "<group>"; };
 		A4F838D6D3FDC76ED96B283B /* Pods-RNBrimodSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNBrimodSDK.debug.xcconfig"; path = "Target Support Files/Pods-RNBrimodSDK/Pods-RNBrimodSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		E8AE61FC0D0CBCECE00DB462 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
@@ -22,6 +22,8 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		523761892E1E2C8100F2A8F8 /* RNBrimodSDK */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
 			path = RNBrimodSDK;
 			sourceTree = "<group>";
 		};
@@ -32,7 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4F5AB129FF77DB760A93006 /* Pods_RNBrimodSDK.framework in Frameworks */,
+				AD37D03F11D6AF61C1BED1F6 /* libPods-RNBrimodSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,7 +44,7 @@
 		1432A484BBFB9B347C90847E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				07BBA0804A447075F86FCA03 /* Pods_RNBrimodSDK.framework */,
+				7E49701EB4A1E4C14C3A36CB /* libPods-RNBrimodSDK.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -86,7 +88,7 @@
 				523761832E1E2C8100F2A8F8 /* Sources */,
 				523761842E1E2C8100F2A8F8 /* Frameworks */,
 				523761852E1E2C8100F2A8F8 /* Resources */,
-				95D003503C5934F8AA18002B /* [CP] Embed Pods Frameworks */,
+				8890A31EE3A2B279C34E565F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -147,21 +149,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		95D003503C5934F8AA18002B /* [CP] Embed Pods Frameworks */ = {
+		8890A31EE3A2B279C34E565F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RNBrimodSDK/Pods-RNBrimodSDK-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-RNBrimodSDK/Pods-RNBrimodSDK-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RNBrimodSDK/Pods-RNBrimodSDK-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-RNBrimodSDK/Pods-RNBrimodSDK-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RNBrimodSDK/Pods-RNBrimodSDK-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RNBrimodSDK/Pods-RNBrimodSDK-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DDD2DB11640DEA885B851BA6 /* [CP] Check Pods Manifest.lock */ = {
@@ -269,7 +271,10 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_CPLUSPLUSFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -340,7 +345,10 @@
 				MTL_FAST_MATH = YES;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_CPLUSPLUSFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				USE_HERMES = false;

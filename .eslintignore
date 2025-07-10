@@ -1,9 +1,0 @@
-node_modules/
-tools/
-vendor/
-apps/
-android/
-ios/
-
-metro.config.js
-boilerplate-mini-app-v1.4.js
