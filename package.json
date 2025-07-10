@@ -12,12 +12,15 @@
     "start": "react-native start"
   },
   "dependencies": {
-    "react": "18.2.0",
-    "react-native": "0.73.11"
+    "react": "*",
+    "react-native": "*"
   },
   "devDependencies": {
+    "@types/react": "^18.2.6",
     "prettier": "2.8.8",
-    "react-native-builder-bob": "^0.40.12"
+    "react-native-builder-bob": "^0.40.12",
+    "standard-version": "^9.5.0",
+    "typescript": "5.0.4"
   },
   "react-native-builder-bob": {
     "source": "src",
