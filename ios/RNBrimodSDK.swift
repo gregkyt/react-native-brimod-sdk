@@ -138,8 +138,7 @@ public class RNBrimodSDK: RCTEventEmitter {
         _ resolver: @escaping RCTPromiseResolveBlock,
         rejecter: @escaping RCTPromiseRejectBlock
     ) {
-        RNBrimodSDK.delegate?.dismiss(
-            onSuccess: { result in
+        RNBrimodSDK.delegate?.dismiss({ result in
                 resolver(result)
             },
             onError: { code, message, error in
