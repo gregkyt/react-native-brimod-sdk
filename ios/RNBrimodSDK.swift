@@ -9,8 +9,6 @@ import Foundation
 import React
 
 public protocol RNBrimodSDKProtocol {
-    func setDelegate(_ delegate: RNBrimodSDKProtocol)
-    
     func selectTabBarItem(
         _ index: NSNumber,
         onSuccess: @escaping (String) -> Void,
@@ -46,7 +44,11 @@ public class RNBrimodSDK: RCTEventEmitter {
     
     public static let shared: RNBrimodSDK = RNBrimodSDK()
     
-    private var delegate: RNBrimodSDKProtocol?
+    private static var delegate: RNBrimodSDKProtocol?
+
+    override init() {
+        super.init()
+    }
     
     @objc public override static func moduleName() -> String! {
         return "RNBrimodSDK"
@@ -61,7 +63,7 @@ public class RNBrimodSDK: RCTEventEmitter {
     }
     
     public func setDelegate(_ delegate: RNBrimodSDKProtocol) {
-        self.delegate = delegate
+        RNBrimodSDK.delegate = delegate
     }
     
     @objc
@@ -70,7 +72,7 @@ public class RNBrimodSDK: RCTEventEmitter {
         resolver: @escaping RCTPromiseResolveBlock,
         rejecter: @escaping RCTPromiseRejectBlock
     ) {
-        delegate?.selectTabBarItem(
+        RNBrimodSDK.delegate?.selectTabBarItem(
             index,
             onSuccess: { result in
                 resolver(result)
@@ -88,7 +90,7 @@ public class RNBrimodSDK: RCTEventEmitter {
         resolver: @escaping RCTPromiseResolveBlock,
         rejecter: @escaping RCTPromiseRejectBlock
     ) {
-        delegate?.requestApiCall(
+        RNBrimodSDK.delegate?.requestApiCall(
             apiName,
             payload: payload,
             onSuccess: { result in
@@ -106,7 +108,7 @@ public class RNBrimodSDK: RCTEventEmitter {
         params: [String: Any]?,
         isRnDismissed: NSNumber
     ) {
-        delegate?.navigateToNative(name, params: params, isRnDismissed: isRnDismissed)
+        RNBrimodSDK.delegate?.navigateToNative(name, params: params, isRnDismissed: isRnDismissed)
     }
     
     @objc
@@ -115,16 +117,16 @@ public class RNBrimodSDK: RCTEventEmitter {
         appName: String,
         params: [String: Any]?
     ) {
-        delegate?.navigateToReact(bundleName, appName: appName, params: params)
+        RNBrimodSDK.delegate?.navigateToReact(bundleName, appName: appName, params: params)
     }
     
     @objc
     func sendDataToReact(_ data: [String: Any]) {
-        delegate?.sendDataToReact(data)
+        RNBrimodSDK.delegate?.sendDataToReact(data)
     }
     
     @objc
     func sendDataToNative(_ name: String, data: [String: Any]) {
-        delegate?.sendDataToNative(name, data: data)
+        RNBrimodSDK.delegate?.sendDataToNative(name, data: data)
     }
-}
+} 

@@ -13,13 +13,15 @@ Pod::Spec.new do |spec|
   spec.platform       = :ios, "13.0"
   spec.source         = { :git => "https://github.com/gregkyt/react-native-brimod-sdk.git", :tag => "#{spec.version}" }
   
-  spec.source_files   = 'ios/RNBrimodSDK/**/*.{swift,h,m}'
+  spec.source_files   = 'ios/*.{swift,h,m,mm}'
   
   spec.swift_versions = ['5.0']
   
   spec.frameworks     = 'Foundation'
-
+  
+  # React Native dependencies
   spec.dependency "React"
+  spec.dependency "React-Core"
   
   # Conditional dependencies for New Architecture
   if ENV['RCT_NEW_ARCH_ENABLED'] == '1'
