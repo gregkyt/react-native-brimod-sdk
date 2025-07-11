@@ -82,6 +82,11 @@ export interface RNBrimodSDKType {
   sendDataToNative(name: string, data: Record<string, any>): void;
 
   /**
+   * Dismiss
+   */
+  dismiss(): Promise<string>;
+
+  /**
    * Add event listener for data from native
    * Returns a subscription that can be used to remove the listener
    */
@@ -131,6 +136,10 @@ const SDK: RNBrimodSDKType = {
 
   sendDataToNative: (name: string, data: Record<string, any>): void => {
     RNBrimodSDK.sendDataToNative(name, data);
+  },
+
+  dismiss: (): Promise<string> => {
+    return RNBrimodSDK.dismiss();
   },
 
   addListener: (

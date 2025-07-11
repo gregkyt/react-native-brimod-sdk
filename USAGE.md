@@ -64,6 +64,15 @@ const MyComponent = () => {
     }
   };
 
+  const handleDismiss = async () => {
+    try {
+      const result = await RNBrimodSDK.dismiss();
+      console.log('Dismissed successfully:', result);
+    } catch (error) {
+      console.error('Error dismissing:', error);
+    }
+  };
+
   const handleNavigateToNative = () => {
     RNBrimodSDK.navigateToNative(
       'ProfileScreen',
@@ -86,6 +95,13 @@ const MyComponent = () => {
     RNBrimodSDK.sendDataToNative('updateUserPrefs', {
       theme: 'dark',
       notifications: true,
+    });
+  };
+
+  const handleSendDataToReact = () => {
+    RNBrimodSDK.sendDataToReact({
+      message: 'Hello from React Native',
+      timestamp: Date.now(),
     });
   };
 
@@ -121,11 +137,21 @@ const MyComponent = () => {
 - `bundleName`: Optional bundle name
 - `params`: Optional parameters to pass
 
+**sendDataToReact(data: Record<string, any>): void**
+
+- Sends data to React Native from the native layer
+- `data`: The data to send
+
 **sendDataToNative(name: string, data: Record<string, any>): void**
 
 - Sends data to the native layer
 - `name`: Identifier for the data type
 - `data`: The data to send
+
+**dismiss(): Promise<string>**
+
+- Dismisses the current React Native view
+- Returns a promise with the result
 
 #### Event Listeners
 
@@ -268,11 +294,6 @@ class BrimodSDKManager: NSObject, RNBrimodSDKProtocol {
         }
     }
 
-    func sendDataToReact(_ data: [String: Any]) {
-        // Send data to React Native through event emitter
-        RNBrimodSDK.shared.sendEvent(withName: "sendDataToReact", body: data)
-    }
-
     func sendDataToNative(_ name: String, data: [String: Any]) {
         // Handle data received from React Native
         print("Received data from React Native - \(name): \(data)")
@@ -288,6 +309,34 @@ class BrimodSDKManager: NSObject, RNBrimodSDKProtocol {
             break
         default:
             print("Unknown data type: \(name)")
+        }
+    }
+
+    func dismiss(
+        _ onSuccess: @escaping (String) -> Void,
+        onError: @escaping (String, String, Error) -> Void
+    ) {
+        DispatchQueue.main.async {
+            guard let currentViewController = self.getCurrentViewController() else {
+                let error = NSError(domain: "BrimodSDK", code: 404, userInfo: [NSLocalizedDescriptionKey: "No view controller to dismiss"])
+                onError("NO_VIEW_CONTROLLER", "No view controller to dismiss", error)
+                return
+            }
+
+            // Check if the current view controller is presented modally
+            if currentViewController.presentingViewController != nil {
+                currentViewController.dismiss(animated: true) {
+                    onSuccess("View dismissed successfully")
+                }
+            } else if let navigationController = currentViewController.navigationController,
+                      navigationController.viewControllers.count > 1 {
+                // If in a navigation stack, pop the view controller
+                navigationController.popViewController(animated: true)
+                onSuccess("View popped successfully")
+            } else {
+                let error = NSError(domain: "BrimodSDK", code: 400, userInfo: [NSLocalizedDescriptionKey: "Cannot dismiss root view controller"])
+                onError("CANNOT_DISMISS_ROOT", "Cannot dismiss root view controller", error)
+            }
         }
     }
 
@@ -386,7 +435,7 @@ class MainViewController: UIViewController {
             "username": "john_doe",
             "isLoggedIn": true
         ]
-        BrimodSDKManager.shared.sendDataToReact(userData)
+        RNBrimodSDK.shared.sendDataToReact(userData)
     }
 
     @IBAction func openReactNativeScreen(_ sender: UIButton) {
@@ -490,10 +539,30 @@ RNBrimodSDK.sendDataToNative('updateSettings', {
   notifications: true,
 });
 
+// Send data to React Native (from native side)
+RNBrimodSDK.sendDataToReact({
+  message: 'Hello from native',
+  timestamp: Date.now(),
+});
+
 // Listen for data from native
 const subscription = RNBrimodSDK.addListener('sendDataToReact', data => {
   console.log('Received from native:', data);
 });
+```
+
+### 5. Dismiss Current View
+
+```typescript
+// Dismiss the current React Native view
+const handleDismiss = async () => {
+  try {
+    const result = await RNBrimodSDK.dismiss();
+    console.log('Dismissed successfully:', result);
+  } catch (error) {
+    console.error('Failed to dismiss:', error);
+  }
+};
 ```
 
 ---
@@ -517,6 +586,7 @@ const subscription = RNBrimodSDK.addListener('sendDataToReact', data => {
 3. **Bridge not initialized**: Ensure the delegate is set in AppDelegate
 4. **Events not received**: Check that event listeners are properly set up
 5. **Navigation fails**: Verify that target screens exist and are properly configured
+6. **Dismiss fails**: Ensure there's a view controller that can be dismissed (not root)
 
 ### iOS Setup Troubleshooting
 
@@ -558,3 +628,4 @@ If you're getting Swift compilation errors, try these steps:
 - Check React Native logs: `npx react-native log-ios`
 - Verify the native bridge is properly connected
 - Use Xcode's debugger to step through Swift code
+- Test the dismiss function in different view controller contexts (modal vs navigation stack)

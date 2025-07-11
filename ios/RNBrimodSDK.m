@@ -32,6 +32,9 @@ RCT_EXTERN_METHOD(sendDataToReact:(NSDictionary *)data)
 RCT_EXTERN_METHOD(sendDataToNative:(NSString *)name
                   data:(NSDictionary *)data)
 
+RCT_EXTERN_METHOD(dismiss:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
+
 + (BOOL)requiresMainQueueSetup
 {
     return YES;

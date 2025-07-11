@@ -34,9 +34,12 @@ public protocol RNBrimodSDKProtocol {
         params: [String: Any]?
     )
     
-    func sendDataToReact(_ data: [String: Any])
-    
     func sendDataToNative(_ name: String, data: [String: Any])
+    
+    func dismiss(
+        _ onSuccess: @escaping (String) -> Void,
+        onError: @escaping (String, String, Error) -> Void
+    )
 }
 
 @objc(RNBrimodSDK)
@@ -122,11 +125,26 @@ public class RNBrimodSDK: RCTEventEmitter {
     
     @objc
     func sendDataToReact(_ data: [String: Any]) {
-        RNBrimodSDK.delegate?.sendDataToReact(data)
+        sendEvent(withName: "sendDataToReact", body: ["data": data])
     }
     
     @objc
     func sendDataToNative(_ name: String, data: [String: Any]) {
         RNBrimodSDK.delegate?.sendDataToNative(name, data: data)
     }
-} 
+    
+    @objc
+    func dismiss(
+        _ resolver: @escaping RCTPromiseResolveBlock,
+        rejecter: @escaping RCTPromiseRejectBlock
+    ) {
+        RNBrimodSDK.delegate?.dismiss(
+            onSuccess: { result in
+                resolver(result)
+            },
+            onError: { code, message, error in
+                rejecter(code, message, error)
+            }
+        )
+    }
+}
