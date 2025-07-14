@@ -2,6 +2,8 @@ package com.brimodsdk;
 
 import android.util.Log;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.Promise;
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import java.util.Map;
 
@@ -37,28 +39,24 @@ public class BrimodSDKManager implements RNBrimodSDKDelegate {
     /**
      * Selects a tab bar item by index.
      * @param index The index of the tab to select.
-     * @param success Callback for successful selection.
-     * @param error Callback for error handling.
+     * @param promise Callback for successful selection.
      */
     @Override
-    public void selectTabBarItem(int index, CallbackSuccess success, CallbackError error) {
+    public void selectTabBarItem(int index, Promise promise) {
         // Placeholder: implement tab selection logic
-        Log.d("BrimodSDKManager", "selectTabBarItem: " + index);
-        success.onSuccess("Tab " + index + " selected");
+        promise.resolve("Tab " + index + " selected");
     }
 
     /**
      * Makes an API call through the native layer.
      * @param apiName The name of the API to call.
      * @param payload Optional payload for the API call.
-     * @param success Callback for successful response.
-     * @param error Callback for error handling.
+     * @param promise Callback for successful response.
      */
     @Override
-    public void requestApiCall(String apiName, Map<String, Object> payload, CallbackSuccess success, CallbackError error) {
+    public void requestApiCall(String apiName, ReadableMap payload, Promise promise) {
         // Placeholder: implement API call logic
-        Log.d("BrimodSDKManager", "requestApiCall: " + apiName + ", payload: " + payload);
-        success.onSuccess("API call to " + apiName + " successful");
+        promise.resolve("API call to " + apiName + " successful");
     }
 
     /**
@@ -68,7 +66,7 @@ public class BrimodSDKManager implements RNBrimodSDKDelegate {
      * @param isRnDismissed Whether to dismiss the React Native view.
      */
     @Override
-    public void navigateToNative(String name, Map<String, Object> params, boolean isRnDismissed) {
+    public void navigateToNative(String name, ReadableMap params, boolean isRnDismissed) {
         // Placeholder: implement navigation to native
         Log.d("BrimodSDKManager", "navigateToNative: " + name + ", params: " + params + ", isRnDismissed: " + isRnDismissed);
     }
@@ -78,11 +76,13 @@ public class BrimodSDKManager implements RNBrimodSDKDelegate {
      * @param bundleName Optional bundle name.
      * @param appName The name of the React Native app/module.
      * @param params Optional parameters to pass.
+     * @param promise Callback for successful navigation.
      */
     @Override
-    public void navigateToReact(String bundleName, String appName, Map<String, Object> params) {
+    public void navigateToReact(String bundleName, String appName, ReadableMap params, Promise promise) {
         // Placeholder: implement navigation to React
         Log.d("BrimodSDKManager", "navigateToReact: bundleName=" + bundleName + ", appName=" + appName + ", params=" + params);
+        promise.resolve(true);
     }
 
     /**
@@ -90,11 +90,11 @@ public class BrimodSDKManager implements RNBrimodSDKDelegate {
      * @param data The data to send.
      */
     @Override
-    public void sendDataToReact(Map<String, Object> data) {
-        // Send event to React Native
+    public void sendDataToReact(String data) {
+        // Placeholder: send event to React Native
         if (reactContext != null) {
             reactContext
-                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .getJSModule(com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                 .emit("sendDataToReact", data);
         }
     }
@@ -105,14 +105,18 @@ public class BrimodSDKManager implements RNBrimodSDKDelegate {
      * @param data The data sent from React Native.
      */
     @Override
-    public void sendDataToNative(String name, Map<String, Object> data) {
-        // Handle data from React Native
-        Log.d("BrimodSDKManager", "sendDataToNative: " + name + ", data: " + data);
+    public void sendDataToNative(String name, String data) {
+        // Placeholder: handle data from React Native
         // Optionally, emit event back to JS
         if (reactContext != null) {
             reactContext
-                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .getJSModule(com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                 .emit("sendDataToNative", data);
         }
+    }
+
+    @Override
+    public void dismissReact() {
+        // Placeholder: dismiss React Native screen
     }
 } 

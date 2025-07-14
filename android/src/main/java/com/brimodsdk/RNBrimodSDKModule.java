@@ -45,7 +45,7 @@ public class RNBrimodSDKModule extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void selectTabBarItem(int index, final Promise promise) {
-        manager.selectTabBarItem(index, promise::resolve, (code, message, error) -> promise.reject(code, message, error));
+        manager.selectTabBarItem(index, promise);
     }
 
     /**
@@ -56,8 +56,7 @@ public class RNBrimodSDKModule extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void requestApiCall(String apiName, ReadableMap payload, final Promise promise) {
-        Map<String, Object> payloadMap = payload != null ? payload.toHashMap() : new HashMap<>();
-        manager.requestApiCall(apiName, payloadMap, promise::resolve, (code, message, error) -> promise.reject(code, message, error));
+        manager.requestApiCall(apiName, payload, promise);
     }
 
     /**
@@ -68,8 +67,7 @@ public class RNBrimodSDKModule extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void navigateToNative(String name, ReadableMap params, boolean isRnDismissed) {
-        Map<String, Object> paramsMap = params != null ? params.toHashMap() : new HashMap<>();
-        manager.navigateToNative(name, paramsMap, isRnDismissed);
+        manager.navigateToNative(name, params, isRnDismissed);
     }
 
     /**
@@ -79,9 +77,8 @@ public class RNBrimodSDKModule extends ReactContextBaseJavaModule {
      * @param params Optional parameters to pass.
      */
     @ReactMethod
-    public void navigateToReact(String bundleName, String appName, ReadableMap params) {
-        Map<String, Object> paramsMap = params != null ? params.toHashMap() : new HashMap<>();
-        manager.navigateToReact(bundleName, appName, paramsMap);
+    public void navigateToReact(String bundleName, String appName, ReadableMap params, final Promise promise) {
+        manager.navigateToReact(bundleName, appName, params, promise);
     }
 
     /**
@@ -89,9 +86,8 @@ public class RNBrimodSDKModule extends ReactContextBaseJavaModule {
      * @param data The data to send.
      */
     @ReactMethod
-    public void sendDataToReact(ReadableMap data) {
-        Map<String, Object> dataMap = data != null ? data.toHashMap() : new HashMap<>();
-        manager.sendDataToReact(dataMap);
+    public void sendDataToReact(String data) {
+        manager.sendDataToReact(data);
     }
 
     /**
@@ -100,8 +96,12 @@ public class RNBrimodSDKModule extends ReactContextBaseJavaModule {
      * @param data The data sent from React Native.
      */
     @ReactMethod
-    public void sendDataToNative(String name, ReadableMap data) {
-        Map<String, Object> dataMap = data != null ? data.toHashMap() : new HashMap<>();
-        manager.sendDataToNative(name, dataMap);
+    public void sendDataToNative(String name, String data) {
+        manager.sendDataToNative(name, data);
+    }
+
+    @ReactMethod
+    public void dismissReact() {
+        manager.dismissReact();
     }
 } 
